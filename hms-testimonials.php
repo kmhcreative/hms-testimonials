@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: HMS Testimonials
-Plugin URI: http://hitmyserver.com
+Plugin URI: http://hitmyserver.net
 Description: Displays your customer testimonials or rotate them. Utilize templates to customize how they are shown.
-Version: 2.2.13
+Version: 2.2.29
 Author: HitMyServer LLC
-Author URI: http://hitmyserver.com
+Author URI: http://hitmyserver.net
 */
 
 
@@ -20,16 +20,16 @@ require_once HMS_TESTIMONIALS . 'admin.php';
  **/
 $hms_testimonials_db_version = 15;
 $hms_shown_rating_aggregate = false;
+$hms_testimonial_footer_rating_aggregate = '';
 
-add_action('wp_enqueue_scripts', create_function('', 'wp_enqueue_script(\'hms-testimonials-rotator\', plugins_url(\'rotator.js\', __FILE__), array( \'jquery\') );'));
+add_action('wp_enqueue_scripts', function() {         wp_enqueue_script('hms_testimonials-rotator',   plugins_url('rotator.js',__FILE__), array('jquery') ); } );
 add_action('plugins_loaded', 'hms_testimonials_db_check');
-
-add_action('init', create_function('', 'if (session_id() == \'\' && !headers_sent()) session_start();ob_start();'));
+add_action('init', function() {         if (session_id() == '' && !headers_sent()) { session_start();ob_start();} });
 add_action('init', 'hms_testimonials_form_submission');
-add_action('admin_init', create_function('', 'HMS_Testimonials::getInstance();'));
-add_action('admin_menu', create_function('', 'HMS_Testimonials::getInstance()->admin_menus();'));
-add_action('admin_head', create_function('', 'HMS_Testimonials::getInstance()->admin_head();'));
-
+add_action('admin_init', function(){ HMS_Testimonials::getInstance(); });
+add_action('admin_menu', function(){ HMS_Testimonials::getInstance()->admin_menus();});
+add_action('admin_head', function(){ HMS_Testimonials::getInstance()->admin_head();});
+add_action('wp_footer',  function(){ global $hms_testimonial_footer_rating_aggregate; echo $hms_testimonial_footer_rating_aggregate; });
 add_action('widgets_init', 'hms_testimonials_widgets');
 
 add_shortcode('hms_testimonials', 'hms_testimonials_show');

@@ -9,6 +9,7 @@ function HMSTestimonialRotate(el) {
 	this.seconds = 5000;
 	this.pauseText = 'Pause';
 	this.playText = 'Play';
+	this.hoverpause = 0;
 
 	var pause_text = el.attr('data-pause-text'),
 		play_text = el.attr('data-play-text'),
@@ -50,25 +51,26 @@ HMSTestimonialRotate.prototype = {
 
 		obj.rotator.find('.controls .playpause').text( obj.playText );
 
-		obj.rotator.find('.controls .prev').click(function() {
+		obj.rotator.find('.controls .prev').click(function(e) {
+			e.preventDefault();
 			obj.prev();
-			return false;
 		});
 
-		obj.rotator.find('.controls .next').click(function() {
+		obj.rotator.find('.controls .next').click(function(e) {
+			e.preventDefault();
 			obj.next();
-			return false;
 		});
 
-		obj.rotator.find('.controls .playpause').click(function() {
+		obj.rotator.find('.controls .playpause').click(function(e) {
+			e.preventDefault();
 
-			if ( obj.isplaying == 1 ) {
+			if ( obj.isplaying == 1 && obj.hoverpause == 0 ) {
 
 				obj.pause();
 				obj.isplaying = 0;
 				jQuery(this).text( obj.playText ).removeClass('pause').addClass('play');
 
-			} else {
+			} else if ( obj.hoverpause == 0 ) {
 
 				obj.start();
 				obj.isplaying = 1;
@@ -76,7 +78,25 @@ HMSTestimonialRotate.prototype = {
 
 			}
 
-			return false;
+			
+		});
+
+		obj.rotator.find('.hms-testimonial-container').hover(function() {
+
+			if ( obj.isplaying == 1 ) {
+				obj.pause();
+				obj.isplaying = 0;
+				obj.hoverpause = 1;
+			}
+
+		}, function() {
+
+			if ( obj.isplaying == 0 && obj.hoverpause == 1 ) {
+				obj.start();
+				obj.isplaying = 1;
+				obj.hoverpause = 0;
+			}
+
 		});
 
 	},
@@ -162,6 +182,8 @@ HMSTestimonialRotate.prototype = {
 			}).fadeIn();
 
 			obj.index = obj.index + 1;
+
+			obj.isplaying = 1;
 			
 		}, obj.seconds);
 	},

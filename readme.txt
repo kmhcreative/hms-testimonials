@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: kreitje
-Donate link: http://hitmyserver.com/wordpress-plugins-donations/
+Donate link: http://hitmyserver.net/wordpress-plugins-donations/
 Tags: testimonials, reviews, client reviews, what they are saying
 Requires at least: 3.5
-Tested up to: 3.9.1
+Tested up to: 5.5
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,18 +12,19 @@ Display your customer testimonials on pages or posts. Use groups to organize and
 
 
 == Description ==
+HMS Testimonials is a testimonial and review plugin for your WordPress website. This plugin was built to cover a bunch of different use cases. Therefore it does not contain any styling to make it "look pretty". You are free to add any CSS to make your testimonials look good to your themes style.css. If you have a unique need and HMS Testimonials doesn't fit, open a [support thread](https://wordpress.org/support/plugin/hms-testimonials) and request what you need. While not all requests are added, many are.
 
-** Now with Akismet anti-spam integration! **
+A few of our unique features include:
 
 * Create your own templates using drag and drop allowing you to display testimonials in different ways through your site.
 * Custom fields! You can now add additional fields to your testimonials.
 * You can now add an image to your testimonial. This allows you show a picture of the person who submitted the testimonial.
+* Create groups to show different sets of testimonials on different pages. Testimonials can be added to multiple groups to reduce duplicates.
 
-HMS Testimonials offers you three shortcodes and two widgets. The first shortcode allows you to show all of your testimonials, a group of testimonials or just a single testimonial. The second shortcode allows you to show all or a group of testimonials that rotate through one at a time. Our third shortcode will display a form on a page or post to alow your visitors to submit testimonials. This shortcode can be placed inside a page or a blog post. If your theme uses sidebars you can use one or both of the widgets we offer. The first widget does the same as our shortcode. It shows all, a group or just one testimonial. Our second widget rotates through the selected testimonials one at a time. After a few seconds it will fade out the old and fade in the new testimonial.
+HMS Testimonials offers you three shortcodes and two widgets. The first shortcode allows you to show all of your testimonials, a group of testimonials or just a single testimonial. The second shortcode allows you to show all or a group of testimonials that rotate through one at a time. Our third shortcode will display a form on a page or post to allow your visitors to submit testimonials. 
 
-Create groups to display specific testimonials on different pages. You can change the order they are shown in using a simple drag and drop method.
+If your theme uses sidebars you can use the widgets we provide The first widget compliments the first shortcode by listing all, a group or just a single testimonial. Our second widget rotates through the selected testimonials one at a time. After a few seconds it will fade out the old testimonial and fade in the new one.
 
-Use the settings to allow access for your users to write testimonials about your company.
     
 
 == Installation ==
@@ -74,6 +75,61 @@ Go to Testimonials. Then click the ID of the testimonial. On the right hand side
 3. Sidebar demonstration
 
 == Changelog ==
+
+= 2.2.29 =
+* Fixed code for PHP 7.4
+* Updated HTMLPurifier with version 4.13.0
+
+= 2.2.28 =
+* Changed a few outdated links
+
+= 2.2.27 =
+* Fix adding testimonials on group view page
+* Fix sorting testimonials on group view page
+* Added the ability to edit a group name
+
+= 2.2.26 =
+* Don't use the image width/height settings in the admin
+
+= 2.2.25 =
+* Fixed an issue where the add group button was being hidden
+
+= 2.2.24 =
+* Fixed an issue where the display order for groups was not saving properly.
+
+= 2.2.23 =
+* Added a setting that will strip http:// and https:// from the part of the URL a visitor would see.
+
+= 2.2.22 =
+* Fixed illegal offset message
+
+= 2.2.21 =
+* Allow YouTube/Vimeo iframes in HTMLPurifier.
+
+= 2.2.20 =
+* Doesn't overwrite the footer aggregate review microdata
+
+= 2.2.19 =
+* Use create_function instead of a closure to support PHP 5.2+
+
+= 2.2.18 =
+* Tested up to 4.0.
+* Use new Akismet calls if available
+* Added the ability to turn off spam notifications if Akismet marks a testimonial as spam.
+* Added the ability to set the location of the aggregate reviews for use with shortcodes
+
+= 2.2.17 =
+* Added IDs to the fields on the add/edit testimonial screen inside the WordPress dashboard.
+
+= 2.2.16 =
+* Added section to the documentation on overriding the rating display.
+* Added an option to stop outputting br tags
+
+= 2.2.15 =
+* Fix bug where pause / play buttons weren't working on hover
+
+= 2.2.14 =
+* Pause the rotating testimonials when you hover over them
 
 = 2.2.13 =
 * Fixed a bug where testimonials were not showing up in for a group in the admin

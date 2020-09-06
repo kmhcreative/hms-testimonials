@@ -61,6 +61,7 @@ class HMS_Testimonials {
 			'form_show_url' => 1,
 			'form_show_upload' => 0,
 			'form_show_rating' => 0,
+			'show_fancy_stars' => 1,
 			'redirect_url' => '',
 			'wp_image_size' => 'large',
 			'moderate_form_submission' => 1,
@@ -373,6 +374,7 @@ JS;
 			$options['form_show_url'] = (isset($_POST['form_show_url']) && $_POST['form_show_url'] == '1') ? 1 : 0;
 			$options['form_show_upload'] = (isset($_POST['form_show_upload']) && $_POST['form_show_upload'] == '1') ? 1 : 0;
 			$options['form_show_rating'] = (isset($_POST['form_show_rating']) && $_POST['form_show_rating'] == '1') ? 1 : 0;
+			$options['show_fancy_stars'] = (isset($_POST['show_fancy_stars']) && $_POST['show_fancy_stars'] == '1') ? 1 : 0;
 			$options['nl2br_on_output'] = (isset($_POST['nl2br_on_output']) && $_POST['nl2br_on_output'] == '1') ? 1 : 0;
 
 			$options['akismet_spam_notifications'] = (isset($_POST['akismet_spam_notifications']) && $_POST['akismet_spam_notifications'] == '1') ? 1 : 0;
@@ -526,7 +528,11 @@ JS;
 								<td><input type="checkbox" name="form_show_rating" value="1" <?php if ($this->options['form_show_rating']==1) echo ' checked="checked"'; ?> /></td>
 							</tr>
 							<tr>
-								<th scope="row">18. Output aggregate review microdata:<br />
+								<th scope="row">18. Use fancy stars for hms_testimonials_form and display?</th>
+								<td><input type="checkbox" name="show_fancy_stars" value="1" <?php if ($this->options['show_fancy_stars']==1) echo ' checked="checked"'; ?> /></td>
+							</tr>
+							<tr>
+								<th scope="row">19. Output aggregate review microdata:<br />
 								<td><select name="rating_output_location">
 										<option value="hidden" <?php if ( $this->options['rating_output_location'] == 'hidden') { ?>selected="selected"<?php } ?> >Hidden</option>
 										<option value="top_of_first" <?php if ( $this->options['rating_output_location'] == 'top_of_first') { ?>selected="selected"<?php } ?>>Top of First Testimonial Section</option>
@@ -537,7 +543,7 @@ JS;
 							</tr>
 
 							<tr>
-								<th scope="row">19. Redirect to this page after a visitor submits a testimonial.</th>
+								<th scope="row">20. Redirect to this page after a visitor submits a testimonial.</th>
 								<td><input type="text" name="redirect_url" value="<?php echo $this->options['redirect_url']; ?>" /></td>
 							</tr>
 
@@ -1064,7 +1070,7 @@ JS;
 				<div>
 					<p>We offer a standard widget called HMS Testimonials where you can display all, a group or a single testimonial. We also offer a rotating widget called 
 						HMS Testimonial Rotator that will show 1 at a time of the entire list or a group and swap them out after x amount of seconds</p>
-
+					
 
 					<br /><br />
 				</div>

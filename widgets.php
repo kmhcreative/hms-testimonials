@@ -135,7 +135,7 @@ class HMS_Testimonials_View extends WP_Widget {
 
 		switch($instance['show']) {
 			case 'single':
-				$get = $wpdb->get_row("SELECT * FROM `".$wpdb->prefix."hms_testimonials` WHERE `id` = ".(int)$instance['show_value']." AND `display` = 1 AND `blog_id` = ".(int)$blog_id, ARRAY_A);
+				$get = $wpdb->get_row("SELECT * FROM ".$wpdb->prefix."hms_testimonials WHERE id = ".(int)$instance['show_value']." AND display = 1 AND blog_id = ".(int)$blog_id, ARRAY_A);
 				$single = 1;
 			break;
 			case 'group':
@@ -146,8 +146,7 @@ class HMS_Testimonials_View extends WP_Widget {
 					$sort = 'RAND()';
 				else
 					$sort = 't.'.$sort;
-
-				$get = $wpdb->get_results("SELECT t.* FROM `".$wpdb->prefix."hms_testimonials` AS t INNER JOIN `".$wpdb->prefix."hms_testimonials_group_meta` AS m ON m.testimonial_id = t.id WHERE m.group_id = ".(int)$instance['show_value']." AND t.blog_id = ".$blog_id." AND t.display = 1 ORDER BY ".$sort." ".$order." ".$limit, ARRAY_A);
+				$get = $wpdb->get_results("SELECT t.* FROM ".$wpdb->prefix."hms_testimonials AS t INNER JOIN ".$wpdb->prefix."hms_testimonials_group_meta AS m ON m.testimonial_id = t.id WHERE m.group_id = ".(int)$instance['show_value']." AND t.blog_id = ".$blog_id." AND t.display = 1 ORDER BY ".$sort." ".$order." ".$limit, ARRAY_A);
 				$single = 0;
 			break;
 			case 'all':
@@ -157,7 +156,7 @@ class HMS_Testimonials_View extends WP_Widget {
 				else
 					$sort = '`'.$sort.'`';
 
-				$get = $wpdb->get_results("SELECT * FROM `".$wpdb->prefix."hms_testimonials` WHERE `display` = 1 AND `blog_id` = ".(int)$blog_id." ORDER BY ".$sort." ".$order." ".$limit, ARRAY_A);
+				$get = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."hms_testimonials WHERE display = 1 AND blog_id = ".(int)$blog_id." ORDER BY ".$sort." ".$order." ".$limit, ARRAY_A);
 				$single = 0;
 			break;
 		}
@@ -231,7 +230,7 @@ class HMS_Testimonials_Rotator extends WP_Widget {
 			<select name="<?php echo $this->get_field_name( 'group' ); ?>" id="<?php echo $this->get_field_id( 'group' ); ?>">
 				<option value="all" <?php if (esc_attr( $group )=='0') echo ' selected="selected"'; ?>>All</option>
 				<?php
-				$get_groups = $wpdb->get_results("SELECT * FROM `".$wpdb->prefix."hms_testimonials_groups` WHERE `blog_id` = ".(int)$blog_id." ORDER BY `name` ASC", ARRAY_A);
+				$get_groups = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."hms_testimonials_groups WHERE blog_id = ".(int)$blog_id." ORDER BY name ASC", ARRAY_A);
 				foreach($get_groups as $g):
 					echo '<option value="'.$g['id'].'"'; if ($group == $g['id']) echo ' selected="selected"';  echo '>'.$g['name'].'</option>';
 				endforeach;
@@ -242,7 +241,7 @@ class HMS_Testimonials_Rotator extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'template' ); ?>"><?php _e('Template', 'hms-testimonials' ); ?>:</label><br />
 			<select name="<?php echo $this->get_field_name( 'template' ); ?>" id="<?php echo $this->get_field_id( 'template' ); ?>">
 				<?php
-				$get_templates = $wpdb->get_results("SELECT * FROM `".$wpdb->prefix."hms_testimonials_templates` WHERE `blog_id` = ".(int)$blog_id." ORDER BY `name` ASC", ARRAY_A);
+				$get_templates = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."hms_testimonials_templates WHERE blog_id = ".(int)$blog_id." ORDER BY name ASC", ARRAY_A);
 				foreach($get_templates as $t):
 					echo '<option value="'.$t['id'].'"'; if ($template == $t['id']) echo ' selected="selected"';  echo '>'.$t['name'].'</option>';
 				endforeach;
@@ -387,7 +386,7 @@ class HMS_Testimonials_Rotator extends WP_Widget {
 			else
 				$sort = '`'.$sort.'`';
 
-			$get = $wpdb->get_results("SELECT * FROM `".$wpdb->prefix."hms_testimonials` WHERE `display` = 1 AND `blog_id` = ".(int)$blog_id." ORDER BY ".$sort." ".$order, ARRAY_A);
+			$get = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."hms_testimonials WHERE display = 1 AND blog_id = ".(int)$blog_id." ORDER BY ".$sort." ".$order, ARRAY_A);
 		} else {
 			if ($sort == 'display_order')
 				$sort = 'm.display_order';
@@ -396,7 +395,7 @@ class HMS_Testimonials_Rotator extends WP_Widget {
 			else
 				$sort = 't.'.$sort;
 
-			$get = $wpdb->get_results("SELECT t.* FROM `".$wpdb->prefix."hms_testimonials` AS t INNER JOIN `".$wpdb->prefix."hms_testimonials_group_meta` AS m ON m.testimonial_id = t.id WHERE m.group_id = ".(int)$instance['group']." AND t.blog_id = ".$blog_id." AND t.display = 1 ORDER BY ".$sort." ".$order, ARRAY_A);
+			$get = $wpdb->get_results("SELECT t.* FROM ".$wpdb->prefix."hms_testimonials AS t INNER JOIN ".$wpdb->prefix."hms_testimonials_group_meta AS m ON m.testimonial_id = t.id WHERE m.group_id = ".(int)$instance['group']." AND t.blog_id = ".$blog_id." AND t.display = 1 ORDER BY ".$sort." ".$order, ARRAY_A);
 		}
 
 		if (count($get)<1)

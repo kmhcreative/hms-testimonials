@@ -1,0 +1,96 @@
+/* 	uncomment for modern looking testimonials
+	make sure Image and Source are first elements
+*/
+/*	
+.hms-testimonial-container {
+	margin-bottom: 20px;
+}
+.hms-testimonial-container img.image {
+	position: relative;
+	margin: 0 auto;
+	border-radius: 100%;
+	display: block;
+	border: 2px solid #ccc;
+}
+.hms-testimonial-container div.author {
+	font-weight: bold;
+	text-align: center;
+	display: block;
+}
+*/
+/* ratings display with testimonial */
+.hms-stars {
+  font-size: inherit;
+  color: inherit;
+}
+.hms-stars.rating-1::before {
+  content: '\2605\2606\2606\2606\2606';
+  font-family: dashicons;
+  
+}
+.hms-stars.rating-2::before {
+  content: '\2605\2605\2606\2606\2606';
+  font-family: dashicons;
+}
+.hms-stars.rating-3::before {
+  content: '\2605\2605\2605\2606\2606';
+  font-family: dashicons;
+}
+.hms-stars.rating-4::before {
+  content: '\2605\2605\2605\2605\2606';
+  font-family: dashicons;
+}
+.hms-stars.rating-5::before{
+  content: '\2605\2605\2605\2605\2605';
+  font-family: dashicons;
+}
+.hms-stars span {
+  margin: 0 10px;
+  /* display: none; if you don't want this text to show */
+}
+
+/* 	testimonials form 
+	stars inherit font color from container
+*/
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:inherit;
+}
+.rate:not(:checked) > label:before {
+    content: '\2606 ';
+    opacity: .5;
+}
+.rate > input:checked ~ label {
+    color: inherit;    
+}
+.rate > input:checked ~ label:before {
+	content: '\2605';
+	opacity: 1;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label { 
+    opacity: .75;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: inherit;
+}
+
+/* Form Stars modified from: https://github.com/mukulkant/Star-rating-using-pure-css */

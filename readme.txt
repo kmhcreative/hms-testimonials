@@ -3,7 +3,7 @@ Contributors: kreitje
 Donate link: http://hitmyserver.net/wordpress-plugins-donations/
 Tags: testimonials, reviews, client reviews, what they are saying
 Requires at least: 3.5
-Tested up to: 5.5
+Tested up to: 5.5.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -75,6 +75,13 @@ Go to Testimonials. Then click the ID of the testimonial. On the right hand side
 3. Sidebar demonstration
 
 == Changelog ==
+
+= 2.2.30 =
+* Fixed Widgets so they work again
+* Fixed shortcode form errors
+* New Setting "Use Fancy Stars" if checked:
+* loads a stylesheet and alternate code for fancy rating stars instead of select on form and text-only on display.
+* Stopped WP Site Health critical issue of session_open() that also causes other critical issues. 
 
 = 2.2.29 =
 * Fixed code for PHP 7.4

@@ -118,7 +118,7 @@ function hms_testimonials_form( $atts ) {
 		</tr>
 HTML;
 
-if ($settings['form_show_url'] == 1) {
+if (isset($settings['form_show_url']) && $settings['form_show_url'] == 1) {
 	$ret .= <<<HTML
 		<tr class="website">
 			<td class="hms-testimonials-label">{$website_text}</td>
@@ -126,7 +126,7 @@ if ($settings['form_show_url'] == 1) {
 		</tr>
 HTML;
 }
-if ($settings['form_show_upload'] == 1) {
+if (isset($settings['form_show_upload']) && $settings['form_show_upload'] == 1) {
 	$ret .= <<<HTML
 		<tr class="image">
 			<td class="hms-testimonials-label">{$image_text}</td>
@@ -135,7 +135,26 @@ if ($settings['form_show_upload'] == 1) {
 HTML;
 }
 
-if ($settings['form_show_rating'] == 1) {
+if (isset($settings['form_show_rating']) && $settings['form_show_rating'] == 1) {
+	if (isset($settings['show_fancy_stars']) && $settings['show_fancy_stars'] == 1) {
+	$ret .= <<<HTML
+		<tr class="rating required">
+			<td class="hms-testimonials-label">{$rating_text}</td>
+			<td class="rate">
+				<input type="radio" id="star5" name="hms_testimonials_rating" value="5" />
+					<label for="star5" title="text">5 stars</label>
+				<input type="radio" id="star4" name="hms_testimonials_rating" value="4" />
+					<label for="star4" title="text">4 stars</label>
+				<input type="radio" id="star3" name="hms_testimonials_rating" value="3" />
+					<label for="star3" title="text">3 stars</label>
+				<input type="radio" id="star2" name="hms_testimonials_rating" value="2" />
+					<label for="star2" title="text">2 stars</label>
+				<input type="radio" id="star1" name="hms_testimonials_rating" value="1" />
+					<label for="star1" title="text">1 star</label>
+			</td>
+		</tr>
+HTML;
+	} else {
 	$ret .= <<<HTML
 		<tr class="rating required">
 			<td class="hms-testimonials-label">{$rating_text}</td>
@@ -147,7 +166,8 @@ if ($settings['form_show_rating'] == 1) {
 					<option value="1">1</option>
 				</select></td>
 		</tr>
-HTML;
+HTML;	
+	}
 }
 
 	$ret .= <<<HTML
@@ -188,14 +208,14 @@ HTML;
 	}
 
 
-	if ($settings['use_recaptcha'] == 1) { 
+	if (isset($settings['use_recaptcha']) && $settings['use_recaptcha'] == 1) { 
 		$ret .= '<tr>
 					<td class="hms-testimonials-label"> </td>
 					<td>'.hms_tesitmonial_recaptcha_get_html($settings['recaptcha_publickey'], null).'</td>
 				</tr>';
 	}
 
-	if ($settings['use_captcha_plugin'] == 1 && function_exists( 'cptch_display_captcha_custom' ) ) {
+	if (isset($settings['use_captcha_plugin']) && $settings['use_captcha_plugin'] == 1 && function_exists( 'cptch_display_captcha_custom' ) ) {
 		$ret .= '<tr class="required captcha-plugin" valign="top">
 					<td class="hms-testimonials-label">Captcha</td>
 					<td><input type="hidden" name="cntctfrm_contact_action" value="true" />' . cptch_display_captcha_custom() . '</td>
